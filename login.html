@@ -1,5 +1,406 @@
+
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Login | CampusGear</title><link rel="stylesheet" href="style.css"></head>
-<body data-page="login" class="auth-page"><header class="site-header"><a class="brand" href="index.html">🎒 Campus<span>Gear</span></a><a class="text-link" href="index.html">← Back to home</a></header>
-<main class="auth-layout"><section class="auth-aside"><span class="eyebrow">WELCOME BACK</span><h1>Your campus community is just a login away.</h1><p>Pick up where you left off. Find items, manage requests, and share resources with fellow students.</p><div class="auth-illustration">📚 💻 🧮 🎒</div><div class="quote">“A shared resource is an opportunity for everyone.”</div></section>
-<section class="auth-card"><div class="auth-card-head"><span class="mini-icon">👋</span><h2>Sign in to CampusGear</h2><p>Enter your account details below.</p></div><form id="login-form" class="form-stack"><label>Email address<input type="email" id="login-email" placeholder="you@university.edu" required></label><label>Password<input type="password" id="login-password" placeholder="Enter your password" required minlength="4"></label><div class="form-row between"><label class="check-label"><input type="checkbox" id="remember-me"> Remember me</label><span class="muted small">Demo sign-in</span></div><button class="btn full-width" type="submit">Sign in →</button><p id="login-message" class="form-message" aria-live="polite"></p></form><div class="demo-box"><strong>Try the demo</strong><p>Register a new account and select Student, Owner, or Admin. This prototype stores demo data in your browser.</p></div><p class="auth-switch">Don't have an account? <a href="register.html">Create one</a></p></section></main><footer class="auth-footer">CampusGear · Smart Campus Resource & Gear Lending Hub</footer><script src="script.js"></script></body></html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusLend | Login</title>
+
+    <link rel="stylesheet" href="login.css">
+
+    <style>
+        .login-btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        #message {
+            line-height: 1.5;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        #verificationPanel {
+            display: none;
+            margin-top: 18px;
+            padding: 16px;
+            background: #fff7e6;
+            border: 1px solid #f1d69b;
+            border-radius: 10px;
+            color: #704b00;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        #verificationPanel p {
+            margin: 8px 0;
+        }
+
+        .verification-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .verification-actions button {
+            border: none;
+            padding: 10px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        #resendVerification {
+            background: #2563eb;
+            color: white;
+        }
+
+        #checkVerification {
+            background: #e2e8f0;
+            color: #172033;
+        }
+
+        .verification-actions button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        /* LOGIN MODE */
+
+        .login-mode {
+            margin: 22px 0;
+        }
+
+        .login-mode-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #344054;
+        }
+
+        .login-mode-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .mode-option {
+            display: block;
+            cursor: pointer;
+        }
+
+        .mode-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .mode-option span {
+            display: block;
+            padding: 13px 10px;
+            text-align: center;
+            border: 1px solid #d0d5dd;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475467;
+            transition: 0.2s ease;
+        }
+
+        .mode-option input:checked + span {
+            background: #f0edff;
+            border-color: #6546e8;
+            color: #5034c5;
+        }
+
+        .mode-option:focus-within span {
+            outline: 2px solid #6546e8;
+            outline-offset: 2px;
+        }
+
+        .admin-note {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 12px;
+            background: #f5f3ff;
+            color: #5034c5;
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 650px) {
+            .welcome-panel {
+                display: none;
+            }
+
+            .form-panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="login-container">
+
+    <!-- WELCOME SECTION -->
+
+    <section class="welcome-panel">
+
+        <div class="brand">
+            <div class="logo">🎓</div>
+
+            <div>
+                <h2>CampusLend</h2>
+                <p>SMART CAMPUS LENDING HUB</p>
+            </div>
+        </div>
+
+        <div class="welcome-content">
+
+            <h1>
+                Borrow smarter.<br>
+                Share better.
+            </h1>
+
+            <p>
+                Find the resources you need.
+                Share what you have.
+                Make campus life easier.
+            </p>
+
+            <div class="resource-icons">
+                <span>📚</span>
+                <span>🧮</span>
+                <span>💻</span>
+                <span>📷</span>
+            </div>
+
+        </div>
+
+        <p class="footer-text">
+            A smarter way to share on campus.
+        </p>
+
+    </section>
+
+
+    <!-- LOGIN SECTION -->
+
+    <section class="form-panel">
+
+        <form id="loginForm">
+
+            <h1>Welcome back!</h1>
+
+            <p class="subtitle">
+                Sign in to access CampusLend.
+            </p>
+
+
+            <!-- LOGIN TYPE -->
+
+            <div class="login-mode">
+
+                <label class="login-mode-label">
+                    Select Login Type
+                </label>
+
+                <div class="login-mode-options">
+
+                    <label class="mode-option">
+                        <input
+                            type="radio"
+                            name="loginRole"
+                            id="studentLogin"
+                            value="student"
+                            checked
+                        >
+                        <span>🎓 Student Login</span>
+                    </label>
+
+                    <label class="mode-option">
+                        <input
+                            type="radio"
+                            name="loginRole"
+                            id="adminLogin"
+                            value="admin"
+                        >
+                        <span>🔐 Admin Login</span>
+                    </label>
+
+                </div>
+
+                <div class="admin-note" id="adminNote">
+                    Admin access is restricted to authorised
+                    CampusLend administrators.
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="Enter your email"
+                    maxlength="254"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="toggle-btn"
+                        aria-label="Show password"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- REMEMBER / FORGOT -->
+
+            <div class="form-options">
+
+                <label class="remember">
+                    <input
+                        type="checkbox"
+                        id="remember"
+                        checked
+                    >
+                    Remember me
+                </label>
+
+                <a href="#" id="forgotLink">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginButton"
+            >
+                Sign In →
+            </button>
+
+
+            <!-- MESSAGE -->
+
+            <p
+                id="message"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+
+            <!-- EMAIL VERIFICATION -->
+
+            <div
+                id="verificationPanel"
+                aria-live="polite"
+            >
+
+                <strong>
+                    Email verification required
+                </strong>
+
+                <p>
+                    Your email address has not been verified yet.
+                    Please open the verification link sent to your email.
+                </p>
+
+                <p>
+                    Check your Inbox and Spam/Junk folders.
+                </p>
+
+                <div class="verification-actions">
+
+                    <button
+                        type="button"
+                        id="resendVerification"
+                    >
+                        Resend verification email
+                    </button>
+
+                    <button
+                        type="button"
+                        id="checkVerification"
+                    >
+                        I have verified – Check again
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- REGISTRATION LINK -->
+
+            <p class="signup-text" id="signupText">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create an account
+                </a>
+
+            </p>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<script type="module" src="login.js"></script>
+
+</body>
+</html>
+
