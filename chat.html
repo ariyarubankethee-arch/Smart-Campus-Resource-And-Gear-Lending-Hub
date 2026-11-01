@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusShare Chat</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .chat-container {
+      max-width: 800px;
+      height: 90vh;
+      margin: 5vh auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 20px;
+      background: #087f64;
+      color: white;
+    }
+
+    .chat-header h2 { margin: 0 0 6px; }
+    .chat-header p { margin: 0; font-size: 14px; }
+
+    .back-link {
+      display: inline-block;
+      color: white;
+      margin-bottom: 12px;
+      text-decoration: none;
+    }
+
+    #chatNotice {
+      padding: 12px 18px;
+      font-size: 14px;
+      background: #f8fafc;
+      color: #475569;
+    }
+
+    #messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 11px 14px;
+      border-radius: 14px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .message.mine {
+      align-self: flex-end;
+      background: #d1fae5;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.theirs {
+      align-self: flex-start;
+      background: #e2e8f0;
+      border-bottom-left-radius: 4px;
+    }
+
+    .sender {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #475569;
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    #messageInput {
+      flex: 1;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font: inherit;
+    }
+
+    #sendButton {
+      padding: 12px 20px;
+      background: #087f64;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #sendButton:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 600px) {
+      .chat-container {
+        height: 100dvh;
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+      }
+
+      .message { max-width: 90%; }
+      .chat-form { padding: 10px; }
+      #sendButton { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="chat-container">
+    <header class="chat-header">
+      <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+      <h2 id="chatTitle">CampusShare Chat</h2>
+      <p id="chatSubtitle">Private conversation</p>
+    </header>
+
+    <div id="chatNotice" role="status">Checking access...</div>
+    <section id="messages" aria-live="polite"></section>
+
+    <form id="chatForm" class="chat-form">
+      <input
+        id="messageInput"
+        type="text"
+        maxlength="2000"
+        placeholder="Type your message..."
+        autocomplete="off"
+        required
+        disabled
+      >
+      <button id="sendButton" type="submit" disabled>Send</button>
+    </form>
+  </main>
+
+  <script type="module" src="chat.js"></script>
+</body>
+</html>

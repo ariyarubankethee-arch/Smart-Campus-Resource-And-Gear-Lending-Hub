@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View resource details and request to borrow from your campus community.">
+    <title>Resource Details | CampusLend</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="item-details.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                Campus<span>Lend</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Items</a>
+                <a href="add-resource.html">Add Resource</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="details-page">
+
+        <a href="browse.html" class="back-link">
+            ← Back to Browse Items
+        </a>
+
+        <div id="detailsMessage"
+             class="details-message info"
+             role="status"
+             aria-live="polite">
+            Loading resource details...
+        </div>
+
+        <div id="item-details" hidden>
+
+            <div class="details-card">
+
+                <div class="details-image">
+                    <div id="itemIcon" class="details-icon">📦</div>
+
+                    <span id="itemAvailability" class="availability-badge">
+                        Available
+                    </span>
+                </div>
+
+                <div class="details-content">
+
+                    <p id="itemCategory" class="details-category"></p>
+
+                    <h1 id="itemName">Resource Name</h1>
+
+                    <p id="itemDescription" class="details-description"></p>
+
+                    <div class="details-information">
+
+                        <div class="info-item">
+                            <small>Condition</small>
+                            <strong id="itemCondition">-</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Location</small>
+                            <strong id="itemLocation">-</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Borrowing Fee</small>
+                            <strong id="itemFee">Free</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <small>Maximum Duration</small>
+                            <strong id="itemDuration">-</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="owner-information">
+                        <h3>Resource Owner</h3>
+                        <strong id="ownerName">Campus Member</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <section class="borrow-section">
+
+                <h2>Request to Borrow</h2>
+
+                <p>
+                    Select your preferred borrowing dates and send
+                    a request to the resource owner.
+                </p>
+
+                <form id="borrowForm">
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="startDate">Borrow Start Date</label>
+                            <input type="date"
+                                   id="startDate"
+                                   name="startDate"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endDate">Expected Return Date</label>
+                            <input type="date"
+                                   id="endDate"
+                                   name="endDate"
+                                   required>
+                        </div>
+
+                    </div>
+
+                    <button type="submit"
+                            id="borrowButton"
+                            class="primary-btn">
+                        Send Borrow Request
+                    </button>
+
+                    <p id="borrowMessage"
+                       role="status"
+                       aria-live="polite"></p>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="logo">
+                Campus<span>Lend</span>
+            </a>
+
+            <p>Sharing resources. Building a stronger campus community.</p>
+
+            <p class="copyright">
+                &copy; 2026 CampusLend. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script type="module" src="item-details.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share useful resources with your university community.">
+    <title>Add a Resource | CampusLend</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="add-resource.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="brand">
+        <span class="brand-icon">🎓</span>
+        <span>CampusLend</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="browse.html">Browse Resources</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+
+    <a href="dashboard.html" class="profile-button">My Account</a>
+</header>
+
+<main class="page-container">
+
+    <section class="page-heading">
+
+        <a href="browse.html" class="back-link">
+            ← Back to Resources
+        </a>
+
+        <div class="heading-content">
+            <div>
+                <span class="eyebrow">SHARE WITH YOUR CAMPUS</span>
+
+                <h1>Add a Resource</h1>
+
+                <p>
+                    List an item you own and help another student
+                    find the resources they need.
+                </p>
+            </div>
+
+            <div class="heading-icon">📦</div>
+        </div>
+
+    </section>
+
+    <div class="form-layout">
+
+        <!-- MAIN FORM -->
+        <section class="form-card">
+
+            <div class="form-card-heading">
+                <h2>Resource Information</h2>
+                <p>Complete the details below to list your resource.</p>
+            </div>
+
+            <form id="resourceForm">
+
+                <div class="form-group">
+                    <label for="resourceName">
+                        Resource Name <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="resourceName"
+                        maxlength="100"
+                        placeholder="e.g. Scientific Calculator"
+                        required
+                    >
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="category">
+                            Category <span>*</span>
+                        </label>
+
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                            <option value="Books">Books & Notes</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Photography">Photography</option>
+                            <option value="Sports">Sports Equipment</option>
+                            <option value="Tools">Tools & Equipment</option>
+                            <option value="Stationery">Stationery</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="condition">
+                            Item Condition <span>*</span>
+                        </label>
+
+                        <select id="condition" required>
+                            <option value="">Select condition</option>
+                            <option value="New">New</option>
+                            <option value="Like New">Like New</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="description">
+                        Description <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="description"
+                        rows="5"
+                        maxlength="1000"
+                        placeholder="Describe your resource and any important details..."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="image-upload-notice">
+                    <strong>📷 Image Upload</strong>
+                    <p>
+                        Image uploading will be available when secure image
+                        storage is configured. You can publish your resource
+                        without an image for now.
+                    </p>
+                </div>
+
+                <hr>
+
+                <h3 class="subheading">Borrowing Details</h3>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="availability">
+                            Availability <span>*</span>
+                        </label>
+
+                        <select id="availability" required>
+                            <option value="Available">Available</option>
+                            <option value="Unavailable">Unavailable</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fee">Borrowing Fee (LKR)</label>
+
+                        <input
+                            type="number"
+                            id="fee"
+                            min="0"
+                            max="1000000"
+                            step="0.01"
+                            value="0"
+                            required
+                        >
+
+                        <small>Enter 0 if borrowing is free.</small>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="maxDays">
+                        Maximum Borrowing Period <span>*</span>
+                    </label>
+
+                    <select id="maxDays" required>
+                        <option value="">Select borrowing period</option>
+                        <option value="1">1 day</option>
+                        <option value="2">2 days</option>
+                        <option value="3">3 days</option>
+                        <option value="5">5 days</option>
+                        <option value="7">7 days</option>
+                        <option value="14">14 days</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">
+                        Pickup Location <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        maxlength="150"
+                        placeholder="e.g. Faculty of Computing"
+                        required
+                    >
+                </div>
+
+                <div class="terms-box">
+                    <input
+                        type="checkbox"
+                        id="confirmOwnership"
+                        required
+                    >
+
+                    <label for="confirmOwnership">
+                        I confirm that I have permission to list this resource
+                        and will provide accurate information.
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="reset" class="reset-button">
+                        Clear Form
+                    </button>
+
+                    <button
+                        type="submit"
+                        id="submitButton"
+                        class="submit-button"
+                    >
+                        Submit Resource →
+                    </button>
+                </div>
+
+                <p
+                    id="formMessage"
+                    class="form-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+        </section>
+
+        <!-- INFORMATION SIDEBAR -->
+        <aside class="info-column">
+
+            <div class="info-card">
+                <div class="info-icon">💡</div>
+
+                <h3>Tips for Listing</h3>
+
+                <ul>
+                    <li>Use a clear resource name.</li>
+                    <li>Describe the item's condition honestly.</li>
+                    <li>Choose a convenient pickup location.</li>
+                    <li>Set a reasonable borrowing period.</li>
+                </ul>
+            </div>
+
+            <div class="info-card purple-card">
+                <div class="info-icon">🤝</div>
+
+                <h3>Share. Borrow. Grow.</h3>
+
+                <p>
+                    Your unused resources could help another student
+                    complete an assignment or prepare for an examination.
+                </p>
+            </div>
+
+            <div class="info-card notice-card">
+                <div class="info-icon">🔒</div>
+
+                <h3>Secure Listings</h3>
+
+                <p>
+                    Only authenticated and email-verified users can
+                    publish resources. Firestore Security Rules must
+                    enforce access permissions.
+                </p>
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+    <p>
+        © 2026 CampusLend | Smart Campus Resource & Gear Lending Hub
+    </p>
+</footer>
+
+<script type="module" src="add-resource.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusLend | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🎓</div>
+            <div>
+                <h2>CampusLend</h2>
+                <p>Admin Panel</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button class="nav-link active" data-section="overview">
+                <span>📊</span>
+                Overview
+            </button>
+
+            <button class="nav-link" data-section="requests">
+                <span>📋</span>
+                Borrowing Requests
+            </button>
+
+            <button class="nav-link" data-section="resources">
+                <span>📦</span>
+                Resources
+            </button>
+
+            <button class="nav-link" data-section="students">
+                <span>👥</span>
+                Students
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="index.html" class="back-link">
+                ← Back to Website
+            </a>
+
+            <button id="adminLogout" class="sidebar-logout">
+                Logout
+            </button>
+
+            <p>CampusLend © 2026</p>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Top Header -->
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">ADMINISTRATION</p>
+
+                <h1 id="pageTitle">Dashboard Overview</h1>
+
+                <p class="page-description">
+                    Manage campus resources and borrowing activities.
+                </p>
+            </div>
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">A</div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <span>System Admin</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Status Message -->
+        <p id="adminMessage" class="admin-message" role="status"></p>
+
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="dashboard-section active">
+
+            <div class="welcome-banner">
+
+                <div>
+                    <span class="welcome-label">CAMPUSLEND ADMIN</span>
+
+                    <h2>Welcome to CampusLend 👋</h2>
+
+                    <p>
+                        Monitor resources, students, and borrowing requests
+                        from one place.
+                    </p>
+                </div>
+
+                <div class="welcome-icon">🏫</div>
+
+            </div>
+
+
+            <!-- Statistics -->
+            <div class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-icon purple">👥</div>
+
+                    <div>
+                        <p>Total Students</p>
+                        <h2 id="totalUsers">--</h2>
+                        <span>Registered users</span>
+                    </div>
+                </article>
+
+
+                <article class="stat-card">
+                    <div class="stat-icon blue">📦</div>
+
+                    <div>
+                        <p>Total Resources</p>
+                        <h2 id="totalResources">--</h2>
+                        <span>Listed campus resources</span>
+                    </div>
+                </article>
+
+
+                <article class="stat-card">
+                    <div class="stat-icon orange">⏳</div>
+
+                    <div>
+                        <p>Pending Requests</p>
+                        <h2 id="pendingRequests">--</h2>
+                        <span>Waiting for review</span>
+                    </div>
+                </article>
+
+
+                <article class="stat-card">
+                    <div class="stat-icon green">✓</div>
+
+                    <div>
+                        <p>Approved Requests</p>
+                        <h2 id="approvedRequests">--</h2>
+                        <span>Approved requests</span>
+                    </div>
+                </article>
+
+            </div>
+
+
+            <!-- Recent Requests -->
+            <div class="content-card">
+
+                <div class="card-heading">
+
+                    <div>
+                        <h2>Recent Borrowing Requests</h2>
+
+                        <p>
+                            Review the latest requests from students.
+                        </p>
+                    </div>
+
+                    <button class="secondary-button" data-go-to="requests">
+                        View All Requests
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Student</th>
+                                <th>Resource</th>
+                                <th>Borrow Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="recentRequestsTable">
+                            <tr>
+                                <td colspan="5">Loading requests...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BORROWING REQUESTS SECTION -->
+        <section id="requests" class="dashboard-section">
+
+            <div class="section-intro">
+                <h2>Borrowing Requests</h2>
+
+                <p>
+                    Review, approve, or reject student borrowing requests.
+                </p>
+            </div>
+
+
+            <div class="filter-bar">
+
+                <input
+                    type="search"
+                    id="requestSearch"
+                    placeholder="Search student, resource or request ID..."
+                    aria-label="Search borrowing requests"
+                >
+
+                <select id="requestStatusFilter">
+                    <option value="all">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Student</th>
+                                <th>Resource</th>
+                                <th>Borrow Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="allRequestsTable">
+                            <tr>
+                                <td colspan="7">Loading requests...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESOURCES SECTION -->
+        <section id="resources" class="dashboard-section">
+
+            <div class="section-intro">
+                <h2>Campus Resources</h2>
+
+                <p>
+                    View and manage resources listed on CampusLend.
+                </p>
+            </div>
+
+
+            <div class="filter-bar">
+
+                <input
+                    type="search"
+                    id="resourceSearch"
+                    placeholder="Search resource name or category..."
+                    aria-label="Search resources"
+                >
+
+                <select id="resourceCategoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Books">Books</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Other">Other</option>
+                </select>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Resource ID</th>
+                                <th>Resource Name</th>
+                                <th>Category</th>
+                                <th>Owner</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="resourcesTable">
+                            <tr>
+                                <td colspan="5">Loading resources...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDENTS SECTION -->
+        <section id="students" class="dashboard-section">
+
+            <div class="section-intro">
+                <h2>Registered Students</h2>
+
+                <p>
+                    View registered CampusLend users.
+                </p>
+            </div>
+
+
+            <div class="filter-bar">
+
+                <input
+                    type="search"
+                    id="studentSearch"
+                    placeholder="Search by name, student ID or email..."
+                    aria-label="Search students"
+                >
+
+            </div>
+
+
+            <div class="content-card">
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Borrowed Items</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentsTable">
+                            <tr>
+                                <td colspan="5">Loading students...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="page-footer">
+
+            <p>
+                CampusLend — Smart Campus Resource & Gear Lending Hub
+            </p>
+
+            <span>Administration Dashboard</span>
+
+        </footer>
+
+    </main>
+
+
+    <!-- Admin JavaScript -->
+    <script type="module" src="admin.js"></script>
+
+</body>
+</html>
